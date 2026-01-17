@@ -1,28 +1,22 @@
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDzgzWWinou5yEjLksEJBCOcIIin0lrWA8",
+  authDomain: "solnet-f2191.firebaseapp.com",
+  projectId: "solnet-f2191",
+  storageBucket: "solnet-f2191.firebasestorage.app",
+  messagingSenderId: "991886660477",
+  appId: "1:991886660477:web:ad882dc4e9cee2086db214",
+  measurementId: "G-324DCMV00T"
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-// If already logged in, go straight to main
-auth.onAuthStateChanged(user => {
-    if (user) {
-        window.location.href = "main.html";
-    }
-});
-
-// Attach this to your login button
 document.getElementById("googleLogin").onclick = async () => {
-    try {
-        await auth.signInWithPopup(provider);
-        window.location.href = "main.html";
-    } catch (err) {
-        alert(err.message);
-    }
+  try {
+    await auth.signInWithPopup(provider);
+    window.location.href = "main.html";
+  } catch (err) {
+    alert(err.message);
+  }
 };
-
