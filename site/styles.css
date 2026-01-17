@@ -4,8 +4,27 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Italic-VariableFont_opsz\,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+
 body {
   font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
   background: radial-gradient(circle at top, #141414, #0b0b0b);
   /* background: #0b0b0b; */
   color: #f5f5f5;
