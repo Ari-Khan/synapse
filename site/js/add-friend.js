@@ -42,6 +42,7 @@ btn.addEventListener('click', async () => {
                         try {
                             const data = JSON.parse(decodedText);
                             const { email, date } = data;
+                            resultDiv.innerText = `Adding friend: ${email}`;
 
                             // check if datetime valid (within 1 min but put 1 hr for ease of testing)
                             const qrTime = new Date(date);
