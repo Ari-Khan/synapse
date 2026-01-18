@@ -15,9 +15,12 @@ router.put("/", async (req, res) => {
     }
 
     const updatedRequest = await Collection.findOneAndUpdate(
-      { ownerEmail: selfEmail },
-      { $push: { contacts: { email: friendEmail } } }, 
-      { new: true, runValidators: true }
+        { ownerEmail: selfEmail },
+        {
+            $setOnInsert: { ownerEmail: selfEmail }, // create ownerEmail if document doesn't exist
+            $addToSet: { contacts: { email: friendEmail } } // add friendEmail if it doesn't exist
+        },
+        { new: true, runValidators: true, upsert: true }
     );
 
     if (!updatedRequest) {
