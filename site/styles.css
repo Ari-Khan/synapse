@@ -5,21 +5,22 @@
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('./assets/fonts/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-VariableFont_opsz\,wght.ttf")
+    format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('./assets/fonts/Inter-Italic-VariableFont_opsz\,wght.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-Italic-VariableFont_opsz\,wght.ttf")
+    format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
-
 
 body {
   font-family: "Inter", sans-serif;
@@ -145,7 +146,9 @@ div.content {
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn.primary:hover {
@@ -243,7 +246,7 @@ div.content {
 .index .mock-card {
   position: absolute;
   width: 260px;
-  height: 360px;
+  height: 370px;
   background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -266,6 +269,47 @@ div.content {
   top: 80px;
   left: 220px;
   transform: rotate(12deg);
+}
+
+.index .mock-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform-origin: center center;
+}
+
+.index .mock-card:hover {
+  transform: scale(1.1) translateY(-20px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+  z-index: 5;
+}
+
+.index .mock-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 26px;
+  padding: 0.8rem;
+}
+
+.index .card-content {
+  padding: 15px;
+  padding-top: 0px;
+}
+
+.index .card-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+.index .card-occupation {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.index .card-location {
+  font-size: 0.85em;
+  color: #999;
 }
 
 @media (max-width: 900px) {
@@ -409,20 +453,22 @@ div.content {
 
 .field input,
 .field textarea {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 14px;
   padding: 14px 16px;
   font-size: 15px;
   color: #f5f5f5;
-  transition: border 0.2s ease, background 0.2s ease;
+  transition:
+    border 0.2s ease,
+    background 0.2s ease;
 }
 
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: rgba(124,92,255,0.6);
-  background: rgba(255,255,255,0.06);
+  border-color: rgba(124, 92, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .field textarea {
@@ -439,14 +485,14 @@ div.content {
 
 .actions .cancel {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #f5f5f5;
   padding: 10px 20px;
   border-radius: 999px;
   cursor: pointer;
 }
 
- .actions .save {
+.actions .save {
   background: linear-gradient(135deg, #7c5cff, #4f46e5);
   color: #fff;
   border: none;
@@ -454,14 +500,15 @@ div.content {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .actions .save:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(124,92,255,0.35);
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
 }
-
 
 /* CONNECT */
 .connect {
@@ -548,7 +595,7 @@ div.content {
   margin-top: 40px;
 }
 
-.aboutUsBox{
+.aboutUsBox {
   border: 1px solid white;
   border-radius: 10px;
   padding: 10px 10px;
@@ -560,7 +607,6 @@ div.content {
   margin-top: 100px;
   margin-bottom: 200px;
 }
-
 
 .add-friend #result {
   margin-top: 1rem;
