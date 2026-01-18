@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 import profileRoutes from "./routes/profile.js";
 import requestRoutes from "./routes/request.js";
+import collectionRoutes from "./routes/collection.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 
 app.use("/api/profile", profileRoutes);
 app.use("/api/request", requestRoutes);
+app.use("/api/collection", collectionRoutes);
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../site")));

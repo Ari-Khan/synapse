@@ -3,10 +3,10 @@ const currentPage = window.location.pathname.split("/").pop();
 const sidebarLinks = document.querySelectorAll(".sidebar a");
 
 sidebarLinks.forEach(link => {
-const hrefPage = link.getAttribute("href");
-if (hrefPage === currentPage) {
+  const hrefPage = link.getAttribute("href");
+  if (hrefPage === currentPage) {
     link.querySelector(".side-btn").classList.add("active");
-}
+  }
 });
 
 const firebaseConfig = {
@@ -28,25 +28,62 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
+  // Static self card
   document.getElementById("welcomeText").textContent = `Welcome, ${user.displayName}`;
   document.getElementById("emailText").textContent = user.email;
-  document.getElementById("avatar").src = user.photoURL;
+  document.getElementById("avatar").referrerPolicy = "no-referrer";
+  document.getElementById("avatar").src =
+    user.photoURL || "assets/default-avatar.png";
   document.getElementById("nameText").textContent = user.displayName;
 
   try {
-    const res = await fetch(`/api/profile?email=${encodeURIComponent(user.email)}`);
-
-    if (!res.ok) {
-      throw new Error("Profile fetch failed");
+    const selfRes = await fetch(`/api/profile?email=${encodeURIComponent(user.email)}`);
+    if (selfRes.ok) {
+      const selfProfile = await selfRes.json();
+      document.getElementById("jobText").textContent =
+        selfProfile.job || "No job set";
+    } else {
+      document.getElementById("jobText").textContent = "Profile not found";
     }
-
-    const profile = await res.json();
-
-    document.getElementById("jobText").textContent =
-      profile.job || "No job set";
-  } catch (err) {
-    console.error(err);
+  } catch {
     document.getElementById("jobText").textContent = "Profile not found";
+  }
+
+  // ---- LOAD CONTACTS ----
+  const container = document.getElementById("cardsContainer");
+
+  try {
+    const res = await fetch(`/api/collection?email=${encodeURIComponent(user.email)}`);
+    if (!res.ok) return;
+
+    const contacts = await res.json();
+    if (!contacts.length) return;
+
+    for (const contact of contacts) {
+      const profileRes = await fetch(
+        `/api/profile?email=${encodeURIComponent(contact.email)}`
+      );
+
+      if (!profileRes.ok) continue;
+
+      const p = await profileRes.json();
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <img 
+          src="${p.avatar || "assets/default-avatar.png"}"
+          referrerpolicy="no-referrer"
+        />
+        <div class="card-name">${p.firstName || ""} ${p.lastName || ""}</div>
+        <div class="card-sub">${p.job || "No job set"}</div>
+      `;
+
+      container.appendChild(card);
+    }
+  } catch (err) {
+    console.error("Failed loading contacts", err);
   }
 });
 
