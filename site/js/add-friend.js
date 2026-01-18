@@ -47,12 +47,13 @@ btn.addEventListener('click', async () => {
                                     if (user.email == email) {
                                         alert('Cannot add yourself as a friend')
                                     } else {
+                                        console.log({ selfEmail: user.email, friendEmail: email })
                                         const res = await fetch("/api/request", {
-                                            method: "POST",
+                                            method: "PUT",
                                             headers: {
                                                 "Content-Type": "application/json",
                                             },
-                                            body: JSON.stringify({ email, date }),
+                                            body: JSON.stringify({ selfEmail: user.email, friendEmail: email }),
                                         });
 
                                         if (res.ok) {

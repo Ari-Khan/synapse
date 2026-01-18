@@ -3,28 +3,28 @@ import Collection from "../models/collection.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const { ownerEmail, targetEmail } = req.body;
+router.put("/", async (req, res) => {
+    const { selfEmail, friendEmail } = req.body;
 
-  if (!ownerEmail || !targetEmail) {
-    return res.status(400).json({ error: "Missing emails" });
-  }
+    if (!selfEmail) {
+        return res.status(400).json({ error: "Missing users email" });
+    }
 
-  if (ownerEmail === targetEmail) {
-    return res.status(400).json({ error: "Cannot add yourself" });
-  }
+    if (!friendEmail) {
+        return res.status(400).json({ error: "Missing new friend's email" });
+    }
 
-  await Collection.findOneAndUpdate(
-    { ownerEmail },
-    {
-      $addToSet: {
-        contacts: { email: targetEmail }
-      }
-    },
-    { upsert: true }
-  );
+    const updatedRequest = await Collection.findOneAndUpdate(
+      { ownerEmail: selfEmail },
+      { $push: { contacts: { email: friendEmail } } }, 
+      { new: true, runValidators: true }
+    );
 
-  res.json({ ok: true });
+    if (!updatedRequest) {
+        return res.status(404).json({ error: "Profile not found for: " + selfEmail });
+    }
+
+    res.json({ ok: true, request: updatedRequest });
 });
 
 export default router;
