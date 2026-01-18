@@ -12,6 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const btn = document.getElementById('connectButton');
 const qrContainer = document.getElementById('qrcode');
+qrContainer.style.display = 'none';
 
 btn.addEventListener('click', async () => {
     qrContainer.innerHTML = '';
@@ -39,6 +40,8 @@ btn.addEventListener('click', async () => {
                 width: 200,
                 height: 200,
             });
+
+            qrContainer.style.display = 'block';
         }
     });
 
