@@ -340,7 +340,10 @@ div.content {
   border-radius: 20px;
   padding: 24px;
   max-width: 320px;
-  margin:20px;
+  margin: 20px;
+}
+.main .card:hover {
+  cursor: pointer;
 }
 
 .main .card img {
