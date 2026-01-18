@@ -94,3 +94,16 @@ document.getElementById("logoutBtn").onclick = async () => {
   await auth.signOut();
   window.location.href = "login.html";
 };
+
+firebase.auth().onAuthStateChanged(async (user) => {
+  if (!user) {
+      window.location.href = "index.html";
+      return;
+  }
+
+  if (user) {
+    document.getElementById("my-card").onclick = () => {
+      window.location.href = `card.html?email=${encodeURIComponent(user.email)}`;
+    };
+  }
+})

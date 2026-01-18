@@ -13,7 +13,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function fillProfile(profile) {
-    document.getElementById("card-title").textContent = profile?.firstName + profile?.lastName || "John Doe";
+    document.getElementById("card-title").textContent = profile?.displayName || "John Doe";
     document.getElementById("email").textContent = profile?.email || "john.doe@gmail.com";
     document.getElementById("job").textContent = profile?.job || "Computer Science";
     document.getElementById("country").textContent = profile?.country || "Canada";
